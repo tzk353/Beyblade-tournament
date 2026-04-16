@@ -240,6 +240,14 @@
       </div>
       <button class="btn btn-secondary mt8" onclick="resetMyStatus()">切換帳號 / 代另一人報到</button>
     </div>
+    <!-- 啟用通知橫幅 -->
+    <div id="enableNoticeBar" class="card" style="background:rgba(255,184,0,.08);border-color:rgba(255,184,0,.35);text-align:center;padding:16px;">
+      <div style="font-size:1.4rem;margin-bottom:6px;">📳</div>
+      <div style="font-size:.88rem;color:var(--gold);font-weight:700;margin-bottom:4px;">請先點下方按鈕啟用震動通知</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;">啟用後比賽通知才能震動與發出聲音</div>
+      <button class="btn btn-gold" style="max-width:220px;margin:0 auto;" onclick="enableNotice()">🔔 啟用震動通知</button>
+    </div>
+
     <div id="checkinForm">
       <div class="card card-accent">
         <label class="field-label">參賽者姓名</label>
@@ -292,7 +300,7 @@
       </div>
       <div class="sec-title">賽程控制</div>
       <div class="card">
-        <p class="text-muted" style="margin-bottom:14px;">報到人數到齊後點下方按鈕生成對戰表（支援 2～32 人）<br><span style="color:var(--gold);font-size:.8rem;">★ 4 強時自動加入季軍賽，產出冠亞季殿四名次</span></p>
+        <p class="text-muted" style="margin-bottom:14px;">報到人數到齊後點下方按鈕生成對戰表（支援 2～64 人）<br><span style="color:var(--gold);font-size:.8rem;">★ 4 強時自動加入季軍賽，產出冠亞季殿四名次</span></p>
         <div class="flex-row">
           <button class="btn btn-gold" onclick="generateBracket()">🎲 生成對戰表</button>
           <button class="btn btn-danger" onclick="resetTournament()">🗑️ 重置比賽</button>
@@ -343,7 +351,16 @@ var FIREBASE_CONFIG = {
 };
 
 /* ── 震動音效 ── */
-var audioCtx=null, lastStandbyTime=0, lastMatchTime=0;
+var audioCtx=null, lastStandbyTime=0, lastMatchTime=0, noticeEnabled=false;
+function enableNotice(){
+  try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  doVibrate([100,50,100]);
+  noticeEnabled=true;
+  document.getElementById('enableNoticeBar').style.display='none';
+  showToast('✅ 震動通知已啟用！','success');
+  // 啟動全局通知監聽（不需要報到也能收）
+  startGlobalNoticeListener();
+}
 function playBeep(n){ try{ if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)(); var d=0; for(var i=0;i<n;i++){(function(t){setTimeout(function(){var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(.6,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.3);o.start();o.stop(audioCtx.currentTime+.3);},t);})(d);d+=400;} }catch(e){} }
 function doVibrate(p){ try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){} }
 function showAlert(icon,title,msg){ document.getElementById('alertIcon').textContent=icon; document.getElementById('alertTitle').textContent=title; document.getElementById('alertMsg').textContent=msg; document.getElementById('alertOverlay').classList.add('show'); }
@@ -424,6 +441,22 @@ function listenMyStatus(myNum){
   _nUnsub=function(){ref.off('value',fn);};
 }
 function resetMyStatus(){ myPlayerKey=null;localStorage.removeItem('bey_my_key');document.getElementById('checkinForm').classList.remove('hidden');document.getElementById('myStatusBox').classList.add('hidden');document.getElementById('playerName').value='';lastStandbyTime=0;lastMatchTime=0; }
+// 全局通知監聽：頁面啟用後就開始監聽，不需要報到
+var _globalNUnsub=null;
+function startGlobalNoticeListener(){
+  if(!db||_globalNUnsub)return;
+  var ref=db.ref('tournament/notices/standby');
+  var fn=ref.on('value',function(snap){
+    var sb=snap.val()||{};
+    if(sb.active&&sb.time&&sb.time!==lastStandbyTime){
+      lastStandbyTime=sb.time;
+      // 只有啟用通知後才震動，但畫面通知一律顯示
+      if(noticeEnabled) triggerStandbyAlert();
+    }
+  });
+  _globalNUnsub=function(){ref.off('value',fn);};
+}
+
 function startPlayerListeners(){
   if(!db)return;
   if(_pUnsub)_pUnsub();
@@ -537,9 +570,19 @@ function generateBracket(){
   if(players.length<2){showToast('至少需要 2 位參賽者','error');return;}
   if(!confirm('確定生成對戰表？生成後無法更改名單。'))return;
   var shuffled=players.slice().sort(function(){return Math.random()-.5;});
-  var pow2=[2,4,8,16,32].find(function(n){return n>=shuffled.length;})||shuffled.length;
+  var pow2=[2,4,8,16,32,64].find(function(n){return n>=shuffled.length;})||shuffled.length;
   while(shuffled.length<pow2)shuffled.push(null);
-  var roundLabels={1:'初賽',2:'16強',3:'8強',4:'4強',5:'準決賽',6:'決賽'};
+  // 依總人數動態決定每輪名稱
+  var totalRounds=Math.log2(pow2);
+  var roundLabels={};
+  // 從決賽往回推
+  roundLabels[totalRounds]='決賽';
+  roundLabels[totalRounds-1]='準決賽';
+  if(totalRounds>=3) roundLabels[totalRounds-2]='8強';
+  if(totalRounds>=4) roundLabels[totalRounds-3]='16強';
+  if(totalRounds>=5) roundLabels[totalRounds-4]='32強';
+  if(totalRounds>=6) roundLabels[totalRounds-5]='64強';
+  if(totalRounds>=7) roundLabels[1]='初賽';
   var rounds=[],current=shuffled,ri=1;
   while(current.length>1){
     var matches=[];
