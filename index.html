@@ -491,7 +491,7 @@ function switchMyPlayer(num,name){
   document.getElementById('myNumDisplay').textContent=num;
   document.getElementById('myNameDisplay').textContent=name+' 選手';
   renderMyTabs();
-  // 通知監聽會自動更新（監聽所有號碼）
+  updateMatchDisplay(); // 切換時立即更新對手顯示
 }
 
 function backToCheckin(){
@@ -501,7 +501,26 @@ function backToCheckin(){
   document.getElementById('playerName').focus();
 }
 
-/* 問題2：通知監聽所有此機報到的號碼 */
+// 根據 currentViewNum 更新對手顯示
+function updateMatchDisplay(){
+  var matches=window._latestMatches||{};
+  var myNum=currentViewNum;
+  var myMatch=null;
+  Object.keys(matches).forEach(function(k){
+    var m=matches[k];
+    if(m.p1num==myNum||m.p2num==myNum) myMatch=m;
+  });
+  if(myMatch){
+    var opp=myMatch.p1num==myNum?myMatch.p2num:myMatch.p1num;
+    document.getElementById('matchNotice').classList.remove('hidden');
+    document.getElementById('oppNumDisplay').textContent=opp;
+    document.getElementById('matchRoundDisplay').textContent=myMatch.roundLabel||'';
+  }else{
+    document.getElementById('matchNotice').classList.add('hidden');
+  }
+}
+
+/* 通知監聽：快取 matches 供切換用，音效通知所有此機選手 */
 function listenMyStatus(){
   if(!db)return;
   if(_nUnsub)_nUnsub();
@@ -513,21 +532,25 @@ function listenMyStatus(){
     var sbActive=!!(sb&&sb.active);
     document.getElementById('standbyNotice').classList.toggle('hidden',!sbActive);
     if(sbActive&&sb.time&&sb.time!==lastStandbyTime){lastStandbyTime=sb.time;triggerStandbyAlert();}
-    // 對戰通知：找出此機所有選手號碼
+    // 快取最新 matches，供 updateMatchDisplay 使用
+    window._latestMatches=data.matches||{};
+    // 顯示當前查看選手的對手
+    updateMatchDisplay();
+    // 音效：任何此機選手有新對戰通知都觸發
     var allNums=myCheckedInPlayers.map(function(p){return p.num;});
     var matches=data.matches||{};
-    var myMatch=null,myNum=null;
     Object.keys(matches).forEach(function(k){
       var m=matches[k];
-      allNums.forEach(function(n){if((m.p1num==n||m.p2num==n)&&!myMatch){myMatch=m;myNum=n;}});
+      if(m.time&&m.time!==lastMatchTime){
+        allNums.forEach(function(n){
+          if(m.p1num==n||m.p2num==n){
+            lastMatchTime=m.time;
+            var opp=m.p1num==n?m.p2num:m.p1num;
+            triggerMatchAlert(opp,m.roundLabel);
+          }
+        });
+      }
     });
-    if(myMatch&&myNum){
-      var opp=myMatch.p1num==myNum?myMatch.p2num:myMatch.p1num;
-      document.getElementById('matchNotice').classList.remove('hidden');
-      document.getElementById('oppNumDisplay').textContent=opp;
-      document.getElementById('matchRoundDisplay').textContent=myMatch.roundLabel||'';
-      if(myMatch.time&&myMatch.time!==lastMatchTime){lastMatchTime=myMatch.time;triggerMatchAlert(opp,myMatch.roundLabel);}
-    }else{document.getElementById('matchNotice').classList.add('hidden');}
   });
   _nUnsub=function(){ref.off('value',fn);};
 }
@@ -665,12 +688,24 @@ function generateBracket(){
     var matches=[];
     for(var i=0;i<current.length;i+=2){
       var m={p1:current[i]||null,p2:current[i+1]||null,winner:null,loser:null,roundIdx:ri,label:roundLabels[ri]||('第'+ri+'輪')};
-      if(!m.p1&&m.p2){m.winner=m.p2;}if(m.p1&&!m.p2){m.winner=m.p1;}
+      if(!m.p1&&m.p2){m.winner=m.p2;}
+      if(m.p1&&!m.p2){m.winner=m.p1;}
       matches.push(m);
     }
     rounds.push(matches);
     current=matches.map(function(m){if(!m.p1)return m.p2;if(!m.p2)return m.p1;return null;});
     ri++;
+  }
+  // 輪空自動晉級：把輪空贏家填入下一輪對應位置
+  for(var r=0;r<rounds.length-1;r++){
+    rounds[r].forEach(function(m,mi){
+      if(m.winner&&(!m.p1||!m.p2)){
+        var nmi=Math.floor(mi/2);
+        var slot=mi%2===0?'p1':'p2';
+        if(!rounds[r+1][nmi]){rounds[r+1][nmi]={};}
+        rounds[r+1][nmi][slot]=m.winner;
+      }
+    });
   }
   db.ref('tournament/bracket').set(rounds).then(function(){
     db.ref('tournament/meta').update({status:'started',currentRound:1,rankings:{}});
@@ -729,6 +764,26 @@ function renderBronze(){
   document.getElementById('bronzeDisplay').innerHTML=html;
 }
 
+// 自動掃描所有輪次，把輪空場次（一方null）的贏家填入下一輪
+function autoAdvanceByes(rounds){
+  for(var r=0;r<rounds.length;r++){
+    rounds[r].forEach(function(m,mi){
+      // 輪空：其中一方是null，自動設winner並填入下一輪
+      if(!m.winner){
+        if(m.p1&&!m.p2){m.winner=m.p1;}
+        else if(!m.p1&&m.p2){m.winner=m.p2;}
+      }
+      if(m.winner&&r+1<rounds.length){
+        var nmi=Math.floor(mi/2);
+        var slot=mi%2===0?'p1':'p2';
+        if(rounds[r+1][nmi]&&!rounds[r+1][nmi][slot]){
+          rounds[r+1][nmi][slot]=m.winner;
+        }
+      }
+    });
+  }
+}
+
 function setWinner(roundIdx,matchIdx,side){
   var match=bracket[roundIdx][matchIdx];
   var winner=side==='p1'?match.p1:match.p2;
@@ -738,6 +793,8 @@ function setWinner(roundIdx,matchIdx,side){
   var isSemiFinal=(roundIdx===bracket.length-2&&bracket.length>=3);
   if(loser&&!isSemiFinal){var le=Object.entries(adminPlayers).find(function(e){return e[1].num===loser.num;});if(le)db.ref('tournament/players/'+le[0]).update({status:'eliminated'});}
   if(roundIdx+1<bracket.length){var nmi=Math.floor(matchIdx/2);bracket[roundIdx+1][nmi][matchIdx%2===0?'p1':'p2']=winner;}
+  // 自動處理下一輪中已確定的輪空場次（一方為null則自動晉級）
+  autoAdvanceByes(bracket);
   db.ref('tournament/bracket').set(bracket).then(function(){
     var roundDone=bracket[roundIdx].every(function(m){return !!m.winner||(!m.p1||!m.p2);});
     if(roundDone){
@@ -757,8 +814,15 @@ function setWinner(roundIdx,matchIdx,side){
           }
         }
         db.ref('tournament/meta').update({currentRound:next+1});
-        /* 問題2：自動發送下一輪通知 */
-        sendCurrentMatchNotices(bracket[next]);
+        // 重新從Firebase讀取確保下一輪選手都填好後再發通知
+        setTimeout(function(){
+          db.ref('tournament/bracket').get().then(function(snap){
+            if(snap.exists()){
+              var freshBracket=snap.val();
+              sendCurrentMatchNotices(freshBracket[next]);
+            }
+          });
+        }, 800);
         showToast('🎉 本輪結束！下一輪通知已自動發送','success');
       }else{
         var runnerUp=side==='p1'?match.p2:match.p1;
