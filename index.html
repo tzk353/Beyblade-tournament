@@ -69,7 +69,7 @@
   .checkin-hero .icon{font-size:4rem;margin-bottom:12px;display:block;}
   .checkin-hero h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--gold);}
   .checkin-hero p{color:var(--muted);font-size:.9rem;margin-top:6px;}
-  .my-status{background:linear-gradient(135deg,rgba(255,68,0,.1),rgba(255,184,0,.06));border:1px solid rgba(255,68,0,.25);border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;}
+  .my-status{background:linear-gradient(135deg,rgba(255,68,0,.1),rgba(255,184,0,.06));border:1px solid rgba(255,68,0,.25);border-radius:16px;padding:24px;text-align:center;margin-bottom:12px;}
   .my-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;background:linear-gradient(135deg,#FF4400,#FFB800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
   .my-label{font-size:.8rem;color:var(--muted);letter-spacing:.15em;margin-top:4px;}
   .match-notice{background:rgba(0,176,255,.06);border:1px solid rgba(0,176,255,.25);border-radius:14px;padding:20px;text-align:center;margin-bottom:14px;animation:pulse-border 2s infinite;}
@@ -80,44 +80,38 @@
   @keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(255,184,0,0);}50%{box-shadow:0 0 0 6px rgba(255,184,0,.1);}}
   .standby-notice h3{color:var(--gold);font-size:1.1rem;}
   .standby-notice p{color:var(--muted);font-size:.85rem;margin-top:6px;}
+  /* 此機已報到選手頁籤 */
+  .my-tabs{margin-bottom:12px;}
+  .my-tabs-label{font-size:.75rem;color:var(--muted);letter-spacing:.08em;margin-bottom:8px;}
+  .my-tabs-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .my-tab-btn{padding:6px 14px;border-radius:999px;border:1.5px solid var(--border);background:var(--panel);color:var(--muted);font-family:'Noto Sans TC',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;}
+  .my-tab-btn.active{border-color:var(--fire);background:var(--fire);color:#fff;}
+  /* 統計 */
   .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
   .stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 10px;text-align:center;}
   .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;}
   .stat-num.fire{color:var(--fire);}.stat-num.gold{color:var(--gold);}.stat-num.success{color:var(--success);}
   .stat-label{font-size:.72rem;color:var(--muted);margin-top:4px;letter-spacing:.08em;}
-
   /* 頒獎台 */
   .podium-wrap{background:linear-gradient(135deg,rgba(255,184,0,.08),rgba(255,68,0,.05));border:1px solid rgba(255,184,0,.2);border-radius:16px;padding:24px;margin-bottom:16px;}
-  .podium-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.12em;color:var(--gold);text-align:center;margin-bottom:20px;}
   .podium-row{display:flex;flex-direction:column;gap:10px;}
   .podium-item{display:flex;align-items:center;gap:14px;background:var(--panel);border-radius:12px;padding:14px 16px;border:1px solid var(--border);}
   .podium-item.rank1{border-color:rgba(255,184,0,.5);background:rgba(255,184,0,.06);}
-  .podium-item.rank2{border-color:rgba(192,192,192,.4);background:rgba(192,192,192,.04);}
-  .podium-item.rank3{border-color:rgba(205,127,50,.4);background:rgba(205,127,50,.05);}
-  .podium-item.rank4{border-color:rgba(107,107,138,.3);}
+  .podium-item.rank2{border-color:rgba(192,192,192,.4);}
+  .podium-item.rank3{border-color:rgba(205,127,50,.4);}
   .podium-medal{font-size:2rem;min-width:40px;text-align:center;}
-  .podium-rank{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);min-width:30px;}
+  .podium-rank{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);min-width:36px;}
   .podium-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--fire);min-width:50px;}
   .podium-name{font-size:1rem;font-weight:700;}
   .podium-name.pending{color:var(--muted);font-style:italic;font-weight:400;}
-
-  /* 勝者覆蓋 */
-  .winner-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;align-items:center;justify-content:center;text-align:center;padding:30px;overflow-y:auto;}
-  .winner-overlay.show{display:flex;flex-direction:column;}
-  .winner-overlay .crown{font-size:4rem;margin-bottom:8px;}
-  .winner-overlay h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:.1em;margin-bottom:20px;}
-  .final-podium{display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;margin-bottom:24px;}
-  .fp-item{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:14px 16px;}
-  .fp-item.r1{border:1.5px solid rgba(255,184,0,.6);}
-  .fp-item.r2{border:1.5px solid rgba(192,192,192,.4);}
-  .fp-item.r3{border:1.5px solid rgba(205,127,50,.4);}
-  .fp-item.r4{border:1.5px solid var(--border);}
-  .fp-medal{font-size:1.6rem;min-width:36px;}
-  .fp-info{text-align:left;}
-  .fp-rank{font-size:.72rem;color:var(--muted);}
-  .fp-name{font-size:1.1rem;font-weight:700;}
-  .fp-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--fire);}
-
+  /* 確認彈窗 */
+  .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:900;align-items:center;justify-content:center;padding:30px;}
+  .confirm-overlay.show{display:flex;}
+  .confirm-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;width:100%;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  .confirm-icon{font-size:3rem;margin-bottom:12px;display:block;}
+  .confirm-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);margin-bottom:8px;}
+  .confirm-msg{font-size:.95rem;color:var(--text);margin-bottom:24px;line-height:1.6;}
+  .confirm-msg strong{color:var(--success);font-size:1.2rem;}
   /* 警報 */
   .alert-overlay{display:none;position:fixed;inset:0;z-index:800;align-items:center;justify-content:center;text-align:center;padding:30px;animation:flashBg .4s ease infinite alternate;}
   .alert-overlay.show{display:flex;flex-direction:column;}
@@ -128,7 +122,6 @@
   @keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-10px);}}
   .alert-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);letter-spacing:.1em;margin-bottom:8px;}
   .alert-msg{font-size:1rem;color:var(--text);margin-bottom:24px;line-height:1.6;white-space:pre-line;}
-
   /* 密碼 */
   .lock-screen{position:fixed;inset:0;background:var(--dark);z-index:500;display:flex;align-items:center;justify-content:center;padding:30px;}
   .lock-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 28px;width:100%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}
@@ -145,6 +138,22 @@
   .numpad-btn.empty{visibility:hidden;}
   .admin-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,184,0,.12);border:1px solid rgba(255,184,0,.3);border-radius:999px;padding:4px 12px;font-size:.78rem;color:var(--gold);cursor:pointer;transition:all .2s;}
   .admin-badge:hover{background:rgba(255,23,68,.15);border-color:var(--danger);color:var(--danger);}
+  /* 最終頒獎 */
+  .winner-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;align-items:center;justify-content:center;text-align:center;padding:30px;overflow-y:auto;}
+  .winner-overlay.show{display:flex;flex-direction:column;}
+  .winner-overlay .crown{font-size:4rem;margin-bottom:8px;}
+  .winner-overlay h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:.1em;margin-bottom:20px;}
+  .final-podium{display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;margin-bottom:24px;}
+  .fp-item{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:14px 16px;}
+  .fp-item.r1{border:1.5px solid rgba(255,184,0,.6);}
+  .fp-item.r2{border:1.5px solid rgba(192,192,192,.4);}
+  .fp-item.r3{border:1.5px solid rgba(205,127,50,.4);}
+  .fp-item.r4{border:1.5px solid var(--border);}
+  .fp-medal{font-size:1.6rem;min-width:36px;}
+  .fp-info{text-align:left;}
+  .fp-rank{font-size:.72rem;color:var(--muted);}
+  .fp-name{font-size:1.1rem;font-weight:700;}
+  .fp-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--fire);}
   .flex-row{display:flex;gap:10px;}.flex-row .btn{flex:1;}
   .mt8{margin-top:8px;}.mt16{margin-top:16px;}
   .text-muted{color:var(--muted);font-size:.85rem;}.text-center{text-align:center;}
@@ -171,6 +180,19 @@
     <div class="alert-title" id="alertTitle">通知</div>
     <div class="alert-msg" id="alertMsg"></div>
     <button class="btn btn-gold" onclick="dismissAlert()">✅ 我知道了</button>
+  </div>
+</div>
+
+<!-- 問題3：獲勝確認彈窗 -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <span class="confirm-icon">⚔️</span>
+    <div class="confirm-title">確認獲勝？</div>
+    <div class="confirm-msg" id="confirmMsg">確定嗎？</div>
+    <div class="flex-row">
+      <button class="btn btn-secondary" onclick="cancelConfirm()">✖ 取消</button>
+      <button class="btn btn-success" id="confirmOkBtn" onclick="doConfirm()">✅ 確認</button>
+    </div>
   </div>
 </div>
 
@@ -222,7 +244,14 @@
       <h2>參賽者報到</h2>
       <p>輸入姓名即可完成報到，一支手機可代多人報到</p>
     </div>
+
+    <!-- 報到後顯示 -->
     <div id="myStatusBox" class="hidden">
+      <!-- 問題1：此機已報到選手切換頁籤 -->
+      <div class="my-tabs" id="myTabsWrap" style="display:none;">
+        <div class="my-tabs-label">📱 此手機已報到的選手</div>
+        <div class="my-tabs-row" id="myTabsRow"></div>
+      </div>
       <div class="my-status">
         <div class="my-num" id="myNumDisplay">—</div>
         <div class="my-label">我的參賽號碼</div>
@@ -238,8 +267,10 @@
         <div style="color:var(--muted);font-size:.82rem;margin-top:6px;">號選手</div>
         <div style="margin-top:10px;font-size:.82rem;color:var(--info);" id="matchRoundDisplay"></div>
       </div>
-      <button class="btn btn-secondary mt8" onclick="resetMyStatus()">切換帳號 / 代另一人報到</button>
+      <button class="btn btn-secondary mt8" onclick="backToCheckin()">＋ 繼續幫其他人報到</button>
     </div>
+
+    <!-- 報到表單 -->
     <div id="checkinForm">
       <div class="card card-accent">
         <label class="field-label">參賽者姓名</label>
@@ -248,6 +279,7 @@
       </div>
       <p class="text-muted text-center" style="margin-top:12px;">📌 每位參賽者只能報到一次，重複報到會收到提示</p>
     </div>
+
     <div class="sec-title">目前已報到名單</div>
     <div class="card">
       <div id="playerRosterList" class="text-muted text-center" style="padding:20px 0;">等待參賽者報到中...</div>
@@ -268,20 +300,18 @@
         <div class="stat-box"><div class="stat-num gold" id="statCurrentRound">—</div><div class="stat-label">目前輪次</div></div>
         <div class="stat-box"><div class="stat-num success" id="statRemaining">—</div><div class="stat-label">剩餘人數</div></div>
       </div>
-
-      <!-- 頒獎台（比賽進行中顯示） -->
+      <!-- 頒獎台 -->
       <div id="podiumSection" class="hidden">
         <div class="sec-title">🏆 目前名次</div>
         <div class="podium-wrap">
           <div class="podium-row">
-            <div class="podium-item rank1"><span class="podium-medal">🥇</span><span class="podium-rank">冠軍</span><span class="podium-num" id="p1num">—</span><span class="podium-name" id="p1name">待定</span></div>
-            <div class="podium-item rank2"><span class="podium-medal">🥈</span><span class="podium-rank">亞軍</span><span class="podium-num" id="p2num">—</span><span class="podium-name" id="p2name">待定</span></div>
-            <div class="podium-item rank3"><span class="podium-medal">🥉</span><span class="podium-rank">季軍</span><span class="podium-num" id="p3num">—</span><span class="podium-name" id="p3name">待定</span></div>
-            <div class="podium-item rank4"><span class="podium-medal">🏅</span><span class="podium-rank">殿軍</span><span class="podium-num" id="p4num">—</span><span class="podium-name" id="p4name">待定</span></div>
+            <div class="podium-item rank1"><span class="podium-medal">🥇</span><span class="podium-rank">冠軍</span><span class="podium-num" id="p1num">—</span><span class="podium-name pending" id="p1name">待定</span></div>
+            <div class="podium-item rank2"><span class="podium-medal">🥈</span><span class="podium-rank">亞軍</span><span class="podium-num" id="p2num">—</span><span class="podium-name pending" id="p2name">待定</span></div>
+            <div class="podium-item rank3"><span class="podium-medal">🥉</span><span class="podium-rank">季軍</span><span class="podium-num" id="p3num">—</span><span class="podium-name pending" id="p3name">待定</span></div>
+            <div class="podium-item"><span class="podium-medal">🏅</span><span class="podium-rank">殿軍</span><span class="podium-num" id="p4num">—</span><span class="podium-name pending" id="p4name">待定</span></div>
           </div>
         </div>
       </div>
-
       <div class="sec-title">報到管理</div>
       <div class="card">
         <div class="flex-row">
@@ -292,7 +322,7 @@
       </div>
       <div class="sec-title">賽程控制</div>
       <div class="card">
-        <p class="text-muted" style="margin-bottom:14px;">報到人數到齊後點下方按鈕生成對戰表（支援 2～64 人）<br><span style="color:var(--gold);font-size:.8rem;">★ 4 強時自動加入季軍賽，產出冠亞季殿四名次</span></p>
+        <p class="text-muted" style="margin-bottom:14px;">報到人數到齊後點下方按鈕生成對戰表（支援 2～64 人）<br><span style="color:var(--gold);font-size:.8rem;">★ 準決賽後自動建立季軍賽，選出冠亞季殿四名次</span></p>
         <div class="flex-row">
           <button class="btn btn-gold" onclick="generateBracket()">🎲 生成對戰表</button>
           <button class="btn btn-danger" onclick="resetTournament()">🗑️ 重置比賽</button>
@@ -301,18 +331,17 @@
       <div id="bracketSection" class="hidden">
         <div class="sec-title">對戰賽程表</div>
         <div class="card" style="margin-bottom:16px;">
-          <p class="text-muted" style="font-size:.82rem;margin-bottom:12px;">📣 主辦方發送通知</p>
+          <p class="text-muted" style="font-size:.82rem;margin-bottom:12px;">📣 主辦方發送通知給所有參賽者</p>
           <div class="flex-row">
             <button class="btn btn-secondary" onclick="sendStandbyNotice()">🔔 請下一組預備</button>
             <button class="btn btn-secondary" onclick="clearNotices()">❌ 清除通知</button>
           </div>
         </div>
         <div id="bracketDisplay"></div>
-        <!-- 季軍賽區塊 -->
         <div id="bronzeSection" class="hidden">
           <div class="sec-title" style="color:#CD7F32;">🥉 季軍賽（第三名決定戰）</div>
           <div class="card" style="border-color:rgba(205,127,50,.3);margin-bottom:8px;">
-            <p class="text-muted" style="font-size:.82rem;margin-bottom:12px;">4強兩場的敗者對決，決定季軍與殿軍</p>
+            <p class="text-muted" style="font-size:.82rem;">4強兩場的敗者對決，決定季軍與殿軍</p>
           </div>
           <div id="bronzeDisplay"></div>
         </div>
@@ -332,54 +361,87 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-var FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAaEpvpFK78ooTnDNU6qfz_92zP_rEYiwI",
-  authDomain: "beyblade-tournament-7ea20.firebaseapp.com",
-  projectId: "beyblade-tournament-7ea20",
-  storageBucket: "beyblade-tournament-7ea20.firebasestorage.app",
-  messagingSenderId: "448691763579",
-  appId: "1:448691763579:web:5991c2f866fe1931a4e5de",
-  databaseURL: "https://beyblade-tournament-7ea20-default-rtdb.firebaseio.com"
+var FIREBASE_CONFIG={
+  apiKey:"AIzaSyAaEpvpFK78ooTnDNU6qfz_92zP_rEYiwI",
+  authDomain:"beyblade-tournament-7ea20.firebaseapp.com",
+  projectId:"beyblade-tournament-7ea20",
+  storageBucket:"beyblade-tournament-7ea20.firebasestorage.app",
+  messagingSenderId:"448691763579",
+  appId:"1:448691763579:web:5991c2f866fe1931a4e5de",
+  databaseURL:"https://beyblade-tournament-7ea20-default-rtdb.firebaseio.com"
 };
 
-/* ── 震動音效 ── */
-var audioCtx=null, lastStandbyTime=0, lastMatchTime=0;
-function playBeep(n){ try{ if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)(); var d=0; for(var i=0;i<n;i++){(function(t){setTimeout(function(){var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(.6,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.3);o.start();o.stop(audioCtx.currentTime+.3);},t);})(d);d+=400;} }catch(e){} }
-function doVibrate(p){ try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){} }
-function showAlert(icon,title,msg){ document.getElementById('alertIcon').textContent=icon; document.getElementById('alertTitle').textContent=title; document.getElementById('alertMsg').textContent=msg; document.getElementById('alertOverlay').classList.add('show'); }
-function dismissAlert(){ document.getElementById('alertOverlay').classList.remove('show'); }
-function triggerStandbyAlert(){ doVibrate([300,100,300,100,500]); playBeep(3); showAlert('🔔','請預備！','即將輪到你的場次\n請前往場地等候！'); }
-function triggerMatchAlert(opp,lbl){ doVibrate([200,100,200]); playBeep(2); showAlert('⚔️','對戰通知！',(lbl||'')+'\n你的對手是 '+opp+' 號選手'); }
+/* ── 音效 ── */
+var audioCtx=null,lastStandbyTime=0,lastMatchTime=0;
+function playBeep(n){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();var d=0;for(var i=0;i<n;i++){(function(t){setTimeout(function(){var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(.6,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.3);o.start();o.stop(audioCtx.currentTime+.3);},t);})(d);d+=400;}}catch(e){}}
+function doVibrate(p){try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){}}
+function showAlert(icon,title,msg){document.getElementById('alertIcon').textContent=icon;document.getElementById('alertTitle').textContent=title;document.getElementById('alertMsg').textContent=msg;document.getElementById('alertOverlay').classList.add('show');}
+function dismissAlert(){document.getElementById('alertOverlay').classList.remove('show');}
+function triggerStandbyAlert(){doVibrate([300,100,300,100,500]);playBeep(3);showAlert('🔔','請預備！','即將輪到你的場次\n請前往場地等候！');}
+function triggerMatchAlert(opp,lbl){doVibrate([200,100,200]);playBeep(2);showAlert('⚔️','對戰通知！',(lbl||'')+'\n你的對手是 '+opp+' 號選手');}
+
+/* ── 問題3：獲勝確認彈窗 ── */
+var _pendingWinner=null;
+function askWinner(roundIdx,matchIdx,side){
+  var match=bracket[roundIdx][matchIdx];
+  var winner=side==='p1'?match.p1:match.p2;
+  var loser=side==='p1'?match.p2:match.p1;
+  _pendingWinner={roundIdx:roundIdx,matchIdx:matchIdx,side:side};
+  document.getElementById('confirmMsg').innerHTML='<strong>'+winner.num+'號 '+winner.name+'</strong> 獲勝<br><span style="color:var(--muted);font-size:.85rem;">'+loser.num+'號 '+loser.name+' 淘汰</span><br><br>確定嗎？';
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+function askBronzeWinner(side){
+  var winner=side==='p1'?bronzeMatch.p1:bronzeMatch.p2;
+  var loser=side==='p1'?bronzeMatch.p2:bronzeMatch.p1;
+  _pendingWinner={bronze:true,side:side};
+  document.getElementById('confirmMsg').innerHTML='<strong>'+winner.num+'號 '+winner.name+'</strong> 獲得季軍<br><span style="color:var(--muted);font-size:.85rem;">'+loser.num+'號 '+loser.name+' 殿軍</span><br><br>確定嗎？';
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+function cancelConfirm(){document.getElementById('confirmOverlay').classList.remove('show');_pendingWinner=null;}
+function doConfirm(){
+  document.getElementById('confirmOverlay').classList.remove('show');
+  if(!_pendingWinner)return;
+  if(_pendingWinner.bronze){setBronzeWinner(_pendingWinner.side);}
+  else{setWinner(_pendingWinner.roundIdx,_pendingWinner.matchIdx,_pendingWinner.side);}
+  _pendingWinner=null;
+}
 
 /* ── 密碼 ── */
 var pinBuffer='',setPinBuffer='',setPinStep='new',setPinFirst='';
-function getPin(){ return localStorage.getItem('bey_pin')||'0000'; }
-function savePin(p){ localStorage.setItem('bey_pin',p); }
-function tryEnterAdmin(){ pinBuffer='';updateDots('dot',0);document.getElementById('lockSub').textContent='請輸入 4 位數密碼';document.getElementById('lockScreen').classList.remove('hidden'); }
-function closeLock(){ document.getElementById('lockScreen').classList.add('hidden');pinBuffer='';updateDots('dot',0); }
-function pinInput(n){ if(pinBuffer.length>=4)return;pinBuffer+=n;updateDots('dot',pinBuffer.length);if(pinBuffer.length===4)verifyPin(); }
-function pinDel(){ if(!pinBuffer.length)return;pinBuffer=pinBuffer.slice(0,-1);updateDots('dot',pinBuffer.length); }
-function verifyPin(){ if(pinBuffer===getPin()){document.getElementById('lockScreen').classList.add('hidden');pinBuffer='';enterAdmin();}else{shakeDots('dot');document.getElementById('lockSub').textContent='密碼錯誤';setTimeout(function(){pinBuffer='';updateDots('dot',0);},600);showToast('密碼錯誤！','error');} }
-function changePin(){ setPinStep='new';setPinBuffer='';setPinFirst='';document.getElementById('setPinTitle').textContent='修改管理密碼';document.getElementById('setPinSub').textContent='請輸入新的 4 位數密碼';updateDots('sdot',0);document.getElementById('setPinScreen').classList.remove('hidden'); }
-function setPinInput(n){ if(setPinBuffer.length>=4)return;setPinBuffer+=n;updateDots('sdot',setPinBuffer.length);if(setPinBuffer.length===4){if(setPinStep==='new'){setPinFirst=setPinBuffer;setPinBuffer='';updateDots('sdot',0);document.getElementById('setPinSub').textContent='請再輸入一次確認';setPinStep='confirm';}else{if(setPinBuffer===setPinFirst){savePin(setPinBuffer);document.getElementById('setPinScreen').classList.add('hidden');showToast('✅ 密碼已更新為 '+setPinBuffer,'success');setPinBuffer='';setPinFirst='';setPinStep='new';}else{shakeDots('sdot');document.getElementById('setPinSub').textContent='兩次不同，請重新輸入';setTimeout(function(){setPinBuffer='';setPinFirst='';setPinStep='new';updateDots('sdot',0);},700);}}} }
-function setPinDel(){ if(!setPinBuffer.length)return;setPinBuffer=setPinBuffer.slice(0,-1);updateDots('sdot',setPinBuffer.length); }
-function cancelSetPin(){ document.getElementById('setPinScreen').classList.add('hidden');setPinBuffer='';setPinFirst='';setPinStep='new'; }
-function updateDots(prefix,count){ for(var i=0;i<4;i++){var d=document.getElementById(prefix+i);d.classList.toggle('filled',i<count);d.classList.remove('shake');} }
-function shakeDots(prefix){ for(var i=0;i<4;i++){var d=document.getElementById(prefix+i);d.style.background='var(--danger)';setTimeout((function(el){return function(){el.style.background='';el.classList.remove('filled');};} )(d),600);} }
-function initPinCheck(){ if(!localStorage.getItem('bey_pin')){setPinStep='new';setPinBuffer='';setPinFirst='';document.getElementById('setPinTitle').textContent='設定管理密碼';document.getElementById('setPinSub').textContent='首次使用，請設定 4 位數管理密碼';updateDots('sdot',0);document.getElementById('setPinScreen').classList.remove('hidden');} }
+function getPin(){return localStorage.getItem('bey_pin')||'0000';}
+function savePin(p){localStorage.setItem('bey_pin',p);}
+function tryEnterAdmin(){pinBuffer='';updateDots('dot',0);document.getElementById('lockSub').textContent='請輸入 4 位數密碼';document.getElementById('lockScreen').classList.remove('hidden');}
+function closeLock(){document.getElementById('lockScreen').classList.add('hidden');pinBuffer='';updateDots('dot',0);}
+function pinInput(n){if(pinBuffer.length>=4)return;pinBuffer+=n;updateDots('dot',pinBuffer.length);if(pinBuffer.length===4)verifyPin();}
+function pinDel(){if(!pinBuffer.length)return;pinBuffer=pinBuffer.slice(0,-1);updateDots('dot',pinBuffer.length);}
+function verifyPin(){if(pinBuffer===getPin()){document.getElementById('lockScreen').classList.add('hidden');pinBuffer='';enterAdmin();}else{shakeDots('dot');document.getElementById('lockSub').textContent='密碼錯誤';setTimeout(function(){pinBuffer='';updateDots('dot',0);},600);showToast('密碼錯誤！','error');}}
+function changePin(){setPinStep='new';setPinBuffer='';setPinFirst='';document.getElementById('setPinTitle').textContent='修改管理密碼';document.getElementById('setPinSub').textContent='請輸入新的 4 位數密碼';updateDots('sdot',0);document.getElementById('setPinScreen').classList.remove('hidden');}
+function setPinInput(n){if(setPinBuffer.length>=4)return;setPinBuffer+=n;updateDots('sdot',setPinBuffer.length);if(setPinBuffer.length===4){if(setPinStep==='new'){setPinFirst=setPinBuffer;setPinBuffer='';updateDots('sdot',0);document.getElementById('setPinSub').textContent='請再輸入一次確認';setPinStep='confirm';}else{if(setPinBuffer===setPinFirst){savePin(setPinBuffer);document.getElementById('setPinScreen').classList.add('hidden');showToast('✅ 密碼已更新為 '+setPinBuffer,'success');setPinBuffer='';setPinFirst='';setPinStep='new';}else{shakeDots('sdot');document.getElementById('setPinSub').textContent='兩次不同，請重新輸入';setTimeout(function(){setPinBuffer='';setPinFirst='';setPinStep='new';updateDots('sdot',0);},700);}}}}
+function setPinDel(){if(!setPinBuffer.length)return;setPinBuffer=setPinBuffer.slice(0,-1);updateDots('sdot',setPinBuffer.length);}
+function cancelSetPin(){document.getElementById('setPinScreen').classList.add('hidden');setPinBuffer='';setPinFirst='';setPinStep='new';}
+function updateDots(prefix,count){for(var i=0;i<4;i++){var d=document.getElementById(prefix+i);d.classList.toggle('filled',i<count);d.classList.remove('shake');}}
+function shakeDots(prefix){for(var i=0;i<4;i++){var d=document.getElementById(prefix+i);d.style.background='var(--danger)';setTimeout((function(el){return function(){el.style.background='';el.classList.remove('filled');};})(d),600);}}
+function initPinCheck(){if(!localStorage.getItem('bey_pin')){setPinStep='new';setPinBuffer='';setPinFirst='';document.getElementById('setPinTitle').textContent='設定管理密碼';document.getElementById('setPinSub').textContent='首次使用，請設定 4 位數管理密碼';updateDots('sdot',0);document.getElementById('setPinScreen').classList.remove('hidden');}}
 
 /* ── Firebase ── */
-var db=null,myPlayerKey=null,adminPlayers={},bracket=[],bronzeMatch=null,currentRound=0;
+var db=null,adminPlayers={},bracket=[],bronzeMatch=null,currentRound=0;
 var _pUnsub=null,_bUnsub=null,_mUnsub=null,_nUnsub=null,_brUnsub=null;
+function initFirebase(){try{var ex=firebase.apps.find(function(a){return a.name==='bey';});if(ex)ex.delete();}catch(e){}try{var app=firebase.initializeApp(FIREBASE_CONFIG,'bey');db=firebase.database(app);return true;}catch(e){showToast('Firebase 連線錯誤：'+e.message,'error');return false;}}
+(function start(){initPinCheck();if(initFirebase())startPlayerListeners();})();
 
-function initFirebase(){ try{var ex=firebase.apps.find(function(a){return a.name==='bey';});if(ex)ex.delete();}catch(e){} try{var app=firebase.initializeApp(FIREBASE_CONFIG,'bey');db=firebase.database(app);return true;}catch(e){showToast('Firebase 連線錯誤：'+e.message,'error');return false;} }
+/* ── 管理員 ── */
+function enterAdmin(){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById('btnPlayer').classList.remove('active');document.getElementById('btnAdmin').classList.add('active');document.getElementById('view-admin').classList.add('active');startAdminListeners();}
+function logoutAdmin(){if(_bUnsub)_bUnsub();if(_mUnsub)_mUnsub();if(_brUnsub)_brUnsub();switchMode('player');showToast('已登出管理員','info');}
 
-(function start(){ initPinCheck(); if(initFirebase())startPlayerListeners(); })();
+/* ══════════════════════════════════════
+   問題1：一機多人報到系統
+══════════════════════════════════════ */
+var myCheckedInPlayers=[]; // [{key,num,name}]
+var currentViewNum=null;
 
-function enterAdmin(){ document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById('btnPlayer').classList.remove('active');document.getElementById('btnAdmin').classList.add('active');document.getElementById('view-admin').classList.add('active');startAdminListeners(); }
-function logoutAdmin(){ if(_bUnsub)_bUnsub();if(_mUnsub)_mUnsub();if(_brUnsub)_brUnsub();switchMode('player');showToast('已登出管理員','info'); }
+function getMyKeys(){try{return JSON.parse(localStorage.getItem('bey_my_keys')||'[]');}catch(e){return[];}}
+function saveMyKeys(arr){localStorage.setItem('bey_my_keys',JSON.stringify(arr));}
 
-/* ── Player ── */
 function doCheckin(){
   var name=document.getElementById('playerName').value.trim();
   if(!name){showToast('請輸入姓名','error');return;}
@@ -393,27 +455,73 @@ function doCheckin(){
       var num=Object.keys(players).length+1;
       var nr=db.ref('tournament/players').push();
       nr.set({name:name,num:num,status:'active',checkinTime:Date.now()}).then(function(){
-        myPlayerKey=nr.key;localStorage.setItem('bey_my_key',myPlayerKey);
-        showToast('✅ 報到成功！你是 '+num+' 號選手','success');
-        showMyStatus(num,name,nr.key);
+        var keys=getMyKeys();keys.push(nr.key);saveMyKeys(keys);
+        myCheckedInPlayers.push({key:nr.key,num:num,name:name});
+        document.getElementById('playerName').value='';
+        showToast('✅ '+name+' 報到成功！號碼：'+num,'success');
+        showMyStatus(num,name);
       });
     });
   });
 }
-function showMyStatus(num,name,key){ document.getElementById('checkinForm').classList.add('hidden');document.getElementById('myStatusBox').classList.remove('hidden');document.getElementById('myNumDisplay').textContent=num;document.getElementById('myNameDisplay').textContent=name+' 選手，歡迎參賽！';myPlayerKey=key;listenMyStatus(num); }
-function listenMyStatus(myNum){
+
+function showMyStatus(num,name){
+  currentViewNum=num;
+  document.getElementById('checkinForm').classList.add('hidden');
+  document.getElementById('myStatusBox').classList.remove('hidden');
+  document.getElementById('myNumDisplay').textContent=num;
+  document.getElementById('myNameDisplay').textContent=name+' 選手，歡迎參賽！';
+  renderMyTabs();
+  listenMyStatus();
+}
+
+function renderMyTabs(){
+  var wrap=document.getElementById('myTabsWrap');
+  var row=document.getElementById('myTabsRow');
+  if(myCheckedInPlayers.length<=1){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  row.innerHTML=myCheckedInPlayers.map(function(p){
+    var active=p.num===currentViewNum;
+    return '<button class="my-tab-btn'+(active?' active':'')+'" onclick="switchMyPlayer('+p.num+',\''+p.name+'\')">'+p.num+'號 '+p.name+'</button>';
+  }).join('');
+}
+
+function switchMyPlayer(num,name){
+  currentViewNum=num;
+  document.getElementById('myNumDisplay').textContent=num;
+  document.getElementById('myNameDisplay').textContent=name+' 選手';
+  renderMyTabs();
+  // 通知監聽會自動更新（監聽所有號碼）
+}
+
+function backToCheckin(){
+  document.getElementById('checkinForm').classList.remove('hidden');
+  document.getElementById('myStatusBox').classList.add('hidden');
+  document.getElementById('playerName').value='';
+  document.getElementById('playerName').focus();
+}
+
+/* 問題2：通知監聽所有此機報到的號碼 */
+function listenMyStatus(){
   if(!db)return;
   if(_nUnsub)_nUnsub();
   var ref=db.ref('tournament/notices');
   var fn=ref.on('value',function(snap){
     var data=snap.val()||{};
+    // 預備通知
     var sb=data.standby||{};
     var sbActive=!!(sb&&sb.active);
     document.getElementById('standbyNotice').classList.toggle('hidden',!sbActive);
     if(sbActive&&sb.time&&sb.time!==lastStandbyTime){lastStandbyTime=sb.time;triggerStandbyAlert();}
-    var matches=data.matches||{},myMatch=null;
-    Object.keys(matches).forEach(function(k){var m=matches[k];if(m.p1num==myNum||m.p2num==myNum)myMatch=m;});
-    if(myMatch){
+    // 對戰通知：找出此機所有選手號碼
+    var allNums=myCheckedInPlayers.map(function(p){return p.num;});
+    var matches=data.matches||{};
+    var myMatch=null,myNum=null;
+    Object.keys(matches).forEach(function(k){
+      var m=matches[k];
+      allNums.forEach(function(n){if((m.p1num==n||m.p2num==n)&&!myMatch){myMatch=m;myNum=n;}});
+    });
+    if(myMatch&&myNum){
       var opp=myMatch.p1num==myNum?myMatch.p2num:myMatch.p1num;
       document.getElementById('matchNotice').classList.remove('hidden');
       document.getElementById('oppNumDisplay').textContent=opp;
@@ -423,23 +531,38 @@ function listenMyStatus(myNum){
   });
   _nUnsub=function(){ref.off('value',fn);};
 }
-function resetMyStatus(){ myPlayerKey=null;localStorage.removeItem('bey_my_key');document.getElementById('checkinForm').classList.remove('hidden');document.getElementById('myStatusBox').classList.add('hidden');document.getElementById('playerName').value='';lastStandbyTime=0;lastMatchTime=0; }
+
 function startPlayerListeners(){
   if(!db)return;
   if(_pUnsub)_pUnsub();
   var ref=db.ref('tournament/players');
   var fn=ref.on('value',function(snap){renderPlayerRoster(snap.val()||{});});
   _pUnsub=function(){ref.off('value',fn);};
-  var sk=localStorage.getItem('bey_my_key');
-  if(sk){db.ref('tournament/players/'+sk).get().then(function(s){if(s.exists()){var p=s.val();showMyStatus(p.num,p.name,sk);}});}
+  // 恢復此機所有報到記錄
+  var keys=getMyKeys();
+  if(!keys.length)return;
+  myCheckedInPlayers=[];
+  var loaded=0;
+  keys.forEach(function(k){
+    db.ref('tournament/players/'+k).get().then(function(s){
+      loaded++;
+      if(s.exists()){var p=s.val();myCheckedInPlayers.push({key:k,num:p.num,name:p.name});}
+      if(loaded===keys.length&&myCheckedInPlayers.length>0){
+        myCheckedInPlayers.sort(function(a,b){return a.num-b.num;});
+        var last=myCheckedInPlayers[myCheckedInPlayers.length-1];
+        showMyStatus(last.num,last.name);
+      }
+    });
+  });
 }
+
 function renderPlayerRoster(players){
   var list=Object.values(players).sort(function(a,b){return a.num-b.num;});
   var el=document.getElementById('playerRosterList');
   if(!list.length){el.innerHTML='<div class="text-muted text-center" style="padding:20px 0;">等待參賽者報到中...</div>';return;}
   el.innerHTML=list.map(function(p){
     var cls=p.status==='active'?'badge-success':p.status==='eliminated'?'badge-muted':'badge-gold';
-    var lbl=p.status==='active'?'進行中':p.status==='eliminated'?'已淘汰':'🏆 冠軍';
+    var lbl=p.status==='active'?'進行中':p.status==='eliminated'?'已淘汰':'🏆';
     return '<div class="player-item"><div class="player-num">'+p.num+'</div><div class="player-name">'+p.name+'</div><span class="badge '+cls+'">'+lbl+'</span></div>';
   }).join('');
 }
@@ -510,28 +633,18 @@ function renderAdminRoster(){
 function updateStats(){
   var active=Object.values(adminPlayers).filter(function(p){return p.status==='active';}).length;
   document.getElementById('statRemaining').textContent=active||'—';
-  var labels=['','初賽','16強','8強','4強','準決賽','決賽'];
+  var labels=['','初賽','16強','8強','準決賽','決賽'];
   document.getElementById('statCurrentRound').textContent=currentRound>0?(labels[currentRound]||'第'+currentRound+'輪'):'—';
 }
-
-/* ── 頒獎台更新 ── */
-function updatePodium(rankings){
+function updatePodium(r){
   document.getElementById('podiumSection').classList.remove('hidden');
-  var data=[
-    {numId:'p1num',nameId:'p1name',p:rankings.first},
-    {numId:'p2num',nameId:'p2name',p:rankings.second},
-    {numId:'p3num',nameId:'p3name',p:rankings.third},
-    {numId:'p4num',nameId:'p4name',p:rankings.fourth}
-  ];
-  data.forEach(function(d){
-    document.getElementById(d.numId).textContent=d.p?d.p.num:'—';
-    var el=document.getElementById(d.nameId);
-    if(d.p){el.textContent=d.p.name;el.classList.remove('pending');}
-    else{el.textContent='待定';el.classList.add('pending');}
+  [{id:'p1',p:r.first},{id:'p2',p:r.second},{id:'p3',p:r.third},{id:'p4',p:r.fourth}].forEach(function(d){
+    document.getElementById(d.id+'num').textContent=d.p?d.p.num:'—';
+    var el=document.getElementById(d.id+'name');
+    if(d.p){el.textContent=d.p.name;el.classList.remove('pending');}else{el.textContent='待定';el.classList.add('pending');}
   });
 }
 
-/* ── 生成對戰表 ── */
 function generateBracket(){
   var players=Object.values(adminPlayers).filter(function(p){return p.status==='active';}).sort(function(a,b){return a.num-b.num;});
   if(players.length<2){showToast('至少需要 2 位參賽者','error');return;}
@@ -539,24 +652,20 @@ function generateBracket(){
   var shuffled=players.slice().sort(function(){return Math.random()-.5;});
   var pow2=[2,4,8,16,32,64].find(function(n){return n>=shuffled.length;})||shuffled.length;
   while(shuffled.length<pow2)shuffled.push(null);
-  // 依總人數動態決定每輪名稱
   var totalRounds=Math.log2(pow2);
   var roundLabels={};
-  // 從決賽往回推
   roundLabels[totalRounds]='決賽';
   roundLabels[totalRounds-1]='準決賽';
-  if(totalRounds>=3) roundLabels[totalRounds-2]='8強';
-  if(totalRounds>=4) roundLabels[totalRounds-3]='16強';
-  if(totalRounds>=5) roundLabels[totalRounds-4]='32強';
-  if(totalRounds>=6) roundLabels[totalRounds-5]='64強';
-  if(totalRounds>=7) roundLabels[1]='初賽';
+  if(totalRounds>=3)roundLabels[totalRounds-2]='8強';
+  if(totalRounds>=4)roundLabels[totalRounds-3]='16強';
+  if(totalRounds>=5)roundLabels[totalRounds-4]='32強';
+  if(totalRounds>=6)roundLabels[totalRounds-5]='64強';
   var rounds=[],current=shuffled,ri=1;
   while(current.length>1){
     var matches=[];
     for(var i=0;i<current.length;i+=2){
       var m={p1:current[i]||null,p2:current[i+1]||null,winner:null,loser:null,roundIdx:ri,label:roundLabels[ri]||('第'+ri+'輪')};
-      if(!m.p1&&m.p2){m.winner=m.p2;m.loser=null;}
-      if(m.p1&&!m.p2){m.winner=m.p1;m.loser=null;}
+      if(!m.p1&&m.p2){m.winner=m.p2;}if(m.p1&&!m.p2){m.winner=m.p1;}
       matches.push(m);
     }
     rounds.push(matches);
@@ -571,7 +680,6 @@ function generateBracket(){
   });
 }
 
-/* ── 渲染主賽程 ── */
 function renderBracket(){
   if(!bracket.length)return;
   var html='';
@@ -592,7 +700,8 @@ function renderBracket(){
       html+='<div class="vs-sep">VS</div>';
       html+='<div class="vs-player '+(p2w?'winner':done?'loser':'')+'"><div class="vs-num">'+(p2?p2.num:'BYE')+'</div><div class="vs-name">'+(p2?p2.name:'輪空')+'</div></div>';
       html+='</div>';
-      if(active)html+='<div class="flex-row mt8"><button class="btn btn-success btn-sm" onclick="setWinner('+ri+','+mi+',\'p1\')">✅ '+p1.num+'號獲勝</button><button class="btn btn-success btn-sm" onclick="setWinner('+ri+','+mi+',\'p2\')">✅ '+p2.num+'號獲勝</button></div>';
+      /* 問題3：按鈕改為呼叫確認彈窗 */
+      if(active)html+='<div class="flex-row mt8"><button class="btn btn-success btn-sm" onclick="askWinner('+ri+','+mi+',\'p1\')">✅ '+p1.num+'號獲勝</button><button class="btn btn-success btn-sm" onclick="askWinner('+ri+','+mi+',\'p2\')">✅ '+p2.num+'號獲勝</button></div>';
       html+='</div>';
     });
     html+='</div>';
@@ -600,12 +709,10 @@ function renderBracket(){
   document.getElementById('bracketDisplay').innerHTML=html;
 }
 
-/* ── 渲染季軍賽 ── */
 function renderBronze(){
   if(!bronzeMatch)return;
   document.getElementById('bronzeSection').classList.remove('hidden');
-  var m=bronzeMatch;
-  var p1=m.p1,p2=m.p2,done=!!m.winner,active=!done&&p1&&p2;
+  var m=bronzeMatch,p1=m.p1,p2=m.p2,done=!!m.winner,active=!done&&p1&&p2;
   var p1w=done&&m.winner&&p1&&m.winner.num===p1.num;
   var p2w=done&&m.winner&&p2&&m.winner.num===p2.num;
   var html='<div class="match-card bronze">';
@@ -616,141 +723,97 @@ function renderBronze(){
   html+='<div class="vs-sep">VS</div>';
   html+='<div class="vs-player '+(p2w?'winner':done?'loser':'')+'"><div class="vs-num">'+(p2?p2.num:'?')+'</div><div class="vs-name">'+(p2?p2.name:'待定')+'</div></div>';
   html+='</div>';
-  if(active)html+='<div class="flex-row mt8"><button class="btn btn-success btn-sm" onclick="setBronzeWinner(\'p1\')">🥉 '+p1.num+'號季軍</button><button class="btn btn-success btn-sm" onclick="setBronzeWinner(\'p2\')">🥉 '+p2.num+'號季軍</button></div>';
+  /* 問題3：季軍賽也加確認彈窗 */
+  if(active)html+='<div class="flex-row mt8"><button class="btn btn-success btn-sm" onclick="askBronzeWinner(\'p1\')">🥉 '+p1.num+'號季軍</button><button class="btn btn-success btn-sm" onclick="askBronzeWinner(\'p2\')">🥉 '+p2.num+'號季軍</button></div>';
   html+='</div>';
   document.getElementById('bronzeDisplay').innerHTML=html;
 }
 
-/* ── 設定主賽程勝者 ── */
 function setWinner(roundIdx,matchIdx,side){
   var match=bracket[roundIdx][matchIdx];
   var winner=side==='p1'?match.p1:match.p2;
   var loser=side==='p1'?match.p2:match.p1;
   bracket[roundIdx][matchIdx].winner=winner;
   bracket[roundIdx][matchIdx].loser=loser;
-
-  // 淘汰輸家（但4強輸家不標記，留給季軍賽）
-  var isSemiFinal=(roundIdx===bracket.length-2 && bracket.length>=3);
-  if(loser && !isSemiFinal){
-    var le=Object.entries(adminPlayers).find(function(e){return e[1].num===loser.num;});
-    if(le)db.ref('tournament/players/'+le[0]).update({status:'eliminated'});
-  }
-
-  // 晉級下一輪
-  if(roundIdx+1<bracket.length){
-    var nmi=Math.floor(matchIdx/2);
-    bracket[roundIdx+1][nmi][matchIdx%2===0?'p1':'p2']=winner;
-  }
-
+  var isSemiFinal=(roundIdx===bracket.length-2&&bracket.length>=3);
+  if(loser&&!isSemiFinal){var le=Object.entries(adminPlayers).find(function(e){return e[1].num===loser.num;});if(le)db.ref('tournament/players/'+le[0]).update({status:'eliminated'});}
+  if(roundIdx+1<bracket.length){var nmi=Math.floor(matchIdx/2);bracket[roundIdx+1][nmi][matchIdx%2===0?'p1':'p2']=winner;}
   db.ref('tournament/bracket').set(bracket).then(function(){
     var roundDone=bracket[roundIdx].every(function(m){return !!m.winner||(!m.p1||!m.p2);});
     if(roundDone){
       var next=roundIdx+1;
       if(next<bracket.length){
-        // 準決賽打完 → 建立季軍賽
-        var isSemi=(next===bracket.length-1 && bracket.length>=3);
+        var isSemi=(next===bracket.length-1&&bracket.length>=3);
         if(isSemi){
           var losers=bracket[roundIdx].filter(function(m){return m.loser;}).map(function(m){return m.loser;});
           if(losers.length>=2){
-            var bm={p1:losers[0],p2:losers[1],winner:null,label:'季軍賽',time:Date.now()};
-            db.ref('tournament/bronzeMatch').set(bm);
+            var t=Date.now();
+            db.ref('tournament/bronzeMatch').set({p1:losers[0],p2:losers[1],winner:null,label:'季軍賽',time:t});
             document.getElementById('bronzeSection').classList.remove('hidden');
             showToast('🥉 季軍賽已建立！','info');
-            // 通知季軍賽選手
-            var t=Date.now();
-            var data={};
-            data['bronze_p1']={p1num:losers[0].num,p2num:losers[1].num,roundLabel:'季軍賽',time:t};
-            data['bronze_p2']={p1num:losers[0].num,p2num:losers[1].num,roundLabel:'季軍賽',time:t};
-            db.ref('tournament/notices/matches').update(data);
+            var bd={};
+            bd['bronze']={p1num:losers[0].num,p2num:losers[1].num,roundLabel:'季軍賽',time:t};
+            db.ref('tournament/notices/matches').update(bd);
           }
         }
         db.ref('tournament/meta').update({currentRound:next+1});
+        /* 問題2：自動發送下一輪通知 */
         sendCurrentMatchNotices(bracket[next]);
-        showToast('🎉 本輪結束！下一輪通知已發送','success');
-      } else {
-        // 決賽結束 → 冠亞軍確定
-        var finalMatch=bracket[roundIdx][matchIdx];
-        var champion=finalMatch.winner;
-        var runnerUp=finalMatch.loser||winner; // runnerUp = 輸家
-        var runnerUpActual=side==='p1'?match.p2:match.p1;
-        var rankings={first:champion,second:runnerUpActual};
+        showToast('🎉 本輪結束！下一輪通知已自動發送','success');
+      }else{
+        var runnerUp=side==='p1'?match.p2:match.p1;
+        var rankings={first:winner,second:runnerUp};
         db.ref('tournament/meta').update({currentRound:next,rankings:rankings});
         updatePodium(rankings);
-        showToast('🏆 決賽結束！等待季軍賽...','success');
-        // 決賽輸家是亞軍，標記
-        var ru=Object.entries(adminPlayers).find(function(e){return e[1].num===runnerUpActual.num;});
+        showToast('🏆 決賽結束！等待季軍賽結果...','success');
+        var ru=Object.entries(adminPlayers).find(function(e){return e[1].num===runnerUp.num;});
         if(ru)db.ref('tournament/players/'+ru[0]).update({status:'eliminated'});
-        var ch=Object.entries(adminPlayers).find(function(e){return e[1].num===champion.num;});
+        var ch=Object.entries(adminPlayers).find(function(e){return e[1].num===winner.num;});
         if(ch)db.ref('tournament/players/'+ch[0]).update({status:'champion'});
-        // 如果已有季軍賽結果，結束比賽
         checkAllDone(rankings);
       }
-    } else {
-      showToast(winner.num+'號選手晉級！','success');
-    }
+    }else{showToast(winner.num+'號選手晉級！','success');}
   });
 }
 
-/* ── 季軍賽勝者 ── */
 function setBronzeWinner(side){
   if(!bronzeMatch)return;
   var winner=side==='p1'?bronzeMatch.p1:bronzeMatch.p2;
   var loser=side==='p1'?bronzeMatch.p2:bronzeMatch.p1;
-  bronzeMatch.winner=winner;
-  bronzeMatch.loser=loser;
+  bronzeMatch.winner=winner;bronzeMatch.loser=loser;
   db.ref('tournament/bronzeMatch').set(bronzeMatch);
-
-  // 標記
-  var we=Object.entries(adminPlayers).find(function(e){return e[1].num===winner.num;});
-  var le=Object.entries(adminPlayers).find(function(e){return e[1].num===loser.num;});
-  if(we)db.ref('tournament/players/'+we[0]).update({status:'eliminated'});
-  if(le)db.ref('tournament/players/'+le[0]).update({status:'eliminated'});
-
+  [winner,loser].forEach(function(p){var e=Object.entries(adminPlayers).find(function(x){return x[1].num===p.num;});if(e)db.ref('tournament/players/'+e[0]).update({status:'eliminated'});});
   showToast('🥉 '+winner.num+'號季軍！','success');
-
-  // 更新名次
   db.ref('tournament/meta').get().then(function(snap){
     var meta=snap.val()||{};
     var rankings=meta.rankings||{};
-    rankings.third=winner;
-    rankings.fourth=loser;
+    rankings.third=winner;rankings.fourth=loser;
     db.ref('tournament/meta').update({rankings:rankings});
     updatePodium(rankings);
     checkAllDone(rankings);
   });
 }
 
-function checkAllDone(rankings){
-  if(rankings.first&&rankings.second&&rankings.third&&rankings.fourth){
-    db.ref('tournament/meta').update({status:'finished'});
-    showFinalResult(rankings);
-  }
-}
+function checkAllDone(r){if(r.first&&r.second&&r.third&&r.fourth){db.ref('tournament/meta').update({status:'finished'});showFinalResult(r);}}
 
-/* ── 最終頒獎 ── */
-function showFinalResult(rankings){
-  var medals=['🥇','🥈','🥉','🏅'];
-  var rankNames=['冠軍','亞軍','季軍','殿軍'];
-  var rankClass=['r1','r2','r3','r4'];
-  var data=[rankings.first,rankings.second,rankings.third,rankings.fourth];
-  var html='';
-  data.forEach(function(p,i){
-    if(!p)return;
-    html+='<div class="fp-item '+rankClass[i]+'"><span class="fp-medal">'+medals[i]+'</span><div class="fp-info"><div class="fp-rank">'+rankNames[i]+'</div><div style="display:flex;align-items:center;gap:8px;"><span class="fp-num">'+p.num+'</span><span class="fp-name">'+p.name+'</span></div></div></div>';
-  });
-  document.getElementById('finalPodium').innerHTML=html;
+function showFinalResult(r){
+  var medals=['🥇','🥈','🥉','🏅'],rankNames=['冠軍','亞軍','季軍','殿軍'],rc=['r1','r2','r3','r4'];
+  var data=[r.first,r.second,r.third,r.fourth];
+  document.getElementById('finalPodium').innerHTML=data.map(function(p,i){
+    if(!p)return'';
+    return'<div class="fp-item '+rc[i]+'"><span class="fp-medal">'+medals[i]+'</span><div class="fp-info"><div class="fp-rank">'+rankNames[i]+'</div><div style="display:flex;align-items:center;gap:8px;"><span class="fp-num">'+p.num+'</span><span class="fp-name">'+p.name+'</span></div></div></div>';
+  }).join('');
   document.getElementById('winnerOverlay').classList.add('show');
 }
 
-/* ── 通知 ── */
 function sendCurrentMatchNotices(round){
   if(!db||!round)return;
   var data={},t=Date.now();
   round.forEach(function(m,i){if(m.p1&&m.p2)data['match_'+i]={p1num:m.p1.num,p2num:m.p2.num,roundLabel:m.label,time:t};});
   db.ref('tournament/notices/matches').set(data);
 }
-function sendStandbyNotice(){ db.ref('tournament/notices/standby').set({active:true,time:Date.now()});showToast('🔔 預備通知已發送','success'); }
-function clearNotices(){ db.ref('tournament/notices').remove();showToast('通知已清除','info'); }
+function sendStandbyNotice(){db.ref('tournament/notices/standby').set({active:true,time:Date.now()});showToast('🔔 預備通知已發送','success');}
+function clearNotices(){db.ref('tournament/notices').remove();showToast('通知已清除','info');}
 function resetTournament(){
   if(!confirm('確定要重置所有比賽資料？此操作無法復原！'))return;
   db.ref('tournament').remove().then(function(){
@@ -764,9 +827,15 @@ function resetTournament(){
   });
 }
 
-/* ── UI ── */
-function switchMode(mode){ document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById('btnPlayer').classList.remove('active');document.getElementById('btnAdmin').classList.remove('active');document.getElementById('view-'+mode).classList.add('active');document.getElementById(mode==='player'?'btnPlayer':'btnAdmin').classList.add('active');if(mode==='player'&&db)startPlayerListeners(); }
-function showToast(msg,type){ type=type||'info';var wrap=document.getElementById('toastWrap');var el=document.createElement('div');el.className='toast '+type;el.textContent=msg;wrap.appendChild(el);setTimeout(function(){if(el.parentNode)el.remove();},3200); }
+function switchMode(mode){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  document.getElementById('btnPlayer').classList.remove('active');
+  document.getElementById('btnAdmin').classList.remove('active');
+  document.getElementById('view-'+mode).classList.add('active');
+  document.getElementById(mode==='player'?'btnPlayer':'btnAdmin').classList.add('active');
+  if(mode==='player'&&db)startPlayerListeners();
+}
+function showToast(msg,type){type=type||'info';var wrap=document.getElementById('toastWrap');var el=document.createElement('div');el.className='toast '+type;el.textContent=msg;wrap.appendChild(el);setTimeout(function(){if(el.parentNode)el.remove();},3200);}
 </script>
 </body>
 </html>
